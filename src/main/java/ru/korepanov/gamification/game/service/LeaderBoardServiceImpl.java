@@ -7,7 +7,6 @@ import ru.korepanov.gamification.game.repository.BadgeRepository;
 import ru.korepanov.gamification.game.repository.ScoreRepository;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,8 +24,8 @@ public class LeaderBoardServiceImpl implements LeaderBoardService {
                     badgeRepository.findByUserIdOrderByBadgeTimestampDesc(row.getUserId())
                             .stream()
                             .map(b -> b.getBadgeType().getDescription())
-                            .collect(Collectors.toList());
+                            .toList();
             return row.withBadges(badges);
-        }).collect(Collectors.toList());
+        }).toList();
     }
 }
