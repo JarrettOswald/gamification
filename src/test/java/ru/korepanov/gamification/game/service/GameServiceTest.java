@@ -56,7 +56,6 @@ class GameServiceTest {
         );
         var gameResult = gameService.newAttemptForUser(challengeNotCorrect);
         Assertions.assertEquals(0, gameResult.getScore());
-        Assertions.assertEquals(0, gameResult.getScore());
         Assertions.assertEquals(0, gameResult.getBadges().size());
     }
 
@@ -74,10 +73,27 @@ class GameServiceTest {
 
         var gameResult = gameService.newAttemptForUser(challengeWithGoldBadge);
 
-        Assertions.assertEquals(4,gameResult.getBadges().size());
+        Assertions.assertEquals(4, gameResult.getBadges().size());
         Assertions.assertTrue(gameResult.getBadges().contains(BadgeType.GOLD));
         Assertions.assertTrue(gameResult.getBadges().contains(BadgeType.SILVER));
         Assertions.assertTrue(gameResult.getBadges().contains(BadgeType.BRONZE));
         Assertions.assertTrue(gameResult.getBadges().contains(BadgeType.LUCKY_NUMBER));
+    }
+
+    @Test
+    void badgeProcessorOptTotalScoreIsEmptyTest() {
+        when(scoreRepository.getTotalScoreForUser(201L)).thenReturn(Optional.empty());
+        ChallengeSolvedDTO challengeWithGoldBadge = new ChallengeSolvedDTO(
+                4L,
+                true,
+                42,
+                40,
+                201L,
+                "Goofy"
+        );
+
+        var gameResult = gameService.newAttemptForUser(challengeWithGoldBadge);
+
+        Assertions.assertEquals(0, gameResult.getBadges().size());
     }
 }
