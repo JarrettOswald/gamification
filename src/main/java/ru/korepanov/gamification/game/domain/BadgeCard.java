@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnTransformer;
 
 @Entity
 @Data
@@ -21,7 +22,8 @@ public class BadgeCard {
     @EqualsAndHashCode.Exclude
     private long badgeTimestamp;
 
-    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "smallint", name = "badge_type", nullable = false)
+    @Enumerated(EnumType.ORDINAL)
     private BadgeType badgeType;
 
     public BadgeCard(final Long userId, final BadgeType badgeType) {

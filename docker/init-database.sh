@@ -15,7 +15,7 @@ CREATE TABLE badge_card (
     badge_id SERIAL PRIMARY KEY,
     user_id BIGINT,
     badge_timestamp BIGINT,
-    badge_type badge_type_enum
+    badge_type smallint
 );
 
 EOSQL
