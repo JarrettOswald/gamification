@@ -1,8 +1,6 @@
 package ru.korepanov.gamification.game.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -23,6 +21,7 @@ public class BadgeCard {
     @EqualsAndHashCode.Exclude
     private long badgeTimestamp;
 
+    @Enumerated(EnumType.STRING)
     private BadgeType badgeType;
 
     public BadgeCard(final Long userId, final BadgeType badgeType) {
