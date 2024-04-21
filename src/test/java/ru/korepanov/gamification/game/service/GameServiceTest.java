@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import ru.korepanov.gamification.challenge.ChallengeSolvedDTO;
+import ru.korepanov.gamification.challenge.ChallengeSolvedEvent;
 import ru.korepanov.gamification.game.domain.BadgeType;
 import ru.korepanov.gamification.game.repository.BadgeRepository;
 import ru.korepanov.gamification.game.repository.ScoreRepository;
@@ -27,7 +27,7 @@ class GameServiceTest {
 
     @Test
     void newAttemptForUserTest() {
-        ChallengeSolvedDTO challengeIsCorrect = new ChallengeSolvedDTO(
+        ChallengeSolvedEvent challengeIsCorrect = new ChallengeSolvedEvent(
                 10L,
                 true,
                 41,
@@ -46,7 +46,7 @@ class GameServiceTest {
 
     @Test
     void challengeIsNotCorrectTest() {
-        ChallengeSolvedDTO challengeNotCorrect = new ChallengeSolvedDTO(
+        ChallengeSolvedEvent challengeNotCorrect = new ChallengeSolvedEvent(
                 8L,
                 false,
                 42,
@@ -62,7 +62,7 @@ class GameServiceTest {
     @Test
     void badgeProcessorTest() {
         when(scoreRepository.getTotalScoreForUser(201L)).thenReturn(Optional.of(401));
-        ChallengeSolvedDTO challengeWithGoldBadge = new ChallengeSolvedDTO(
+        ChallengeSolvedEvent challengeWithGoldBadge = new ChallengeSolvedEvent(
                 4L,
                 true,
                 42,
@@ -83,7 +83,7 @@ class GameServiceTest {
     @Test
     void badgeProcessorOptTotalScoreIsEmptyTest() {
         when(scoreRepository.getTotalScoreForUser(201L)).thenReturn(Optional.empty());
-        ChallengeSolvedDTO challengeWithGoldBadge = new ChallengeSolvedDTO(
+        ChallengeSolvedEvent challengeWithGoldBadge = new ChallengeSolvedEvent(
                 4L,
                 true,
                 42,

@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.json.JacksonTester;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.korepanov.gamification.challenge.ChallengeSolvedDTO;
+import ru.korepanov.gamification.challenge.ChallengeSolvedEvent;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -22,11 +22,11 @@ class GameControllerTest { //todo замокировать дургие моду
     private MockMvc mockMvc;
 
     @Autowired
-    private JacksonTester<ChallengeSolvedDTO> jsonChallengeSolvedDTO;
+    private JacksonTester<ChallengeSolvedEvent> jsonChallengeSolvedDTO;
 
     @Test
     void postResult() throws Exception {
-        var challengeSolvedDTO = new ChallengeSolvedDTO(
+        var challengeSolvedDTO = new ChallengeSolvedEvent(
                 1L,
                 true,
                 41,

@@ -4,7 +4,7 @@ package ru.korepanov.gamification.game.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import ru.korepanov.gamification.challenge.ChallengeSolvedDTO;
+import ru.korepanov.gamification.challenge.ChallengeSolvedEvent;
 import ru.korepanov.gamification.game.badgeprocessors.BadgeProcessor;
 import ru.korepanov.gamification.game.domain.BadgeCard;
 import ru.korepanov.gamification.game.domain.BadgeType;
@@ -28,7 +28,7 @@ public class GameServiceImpl implements GameService {
     private final List<BadgeProcessor> badgeProcessors;
 
     @Override
-    public GameResult newAttemptForUser(ChallengeSolvedDTO challenge) {
+    public GameResult newAttemptForUser(final ChallengeSolvedEvent challenge) {
         if (!challenge.isCorrect()) {
             log.info("Attempt id {} is not correct. User {} does not get score.",
                     challenge.getAttemptId(),
@@ -51,7 +51,7 @@ public class GameServiceImpl implements GameService {
                         .toList());
     }
 
-    private List<BadgeCard> processForBadges(final ChallengeSolvedDTO solvedChallenge) {
+    private List<BadgeCard> processForBadges(final ChallengeSolvedEvent solvedChallenge) {
         Optional<Integer> optTotalScore = scoreRepository.getTotalScoreForUser(solvedChallenge.getUserId());
 
         if (optTotalScore.isEmpty()) {

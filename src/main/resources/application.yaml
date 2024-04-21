@@ -13,3 +13,19 @@ server:
   error:
     include-message: always
     include-binding-errors: always
+
+
+amqp:
+  exchange:
+    attempts: attempts.topic
+  queue:
+    gamification: gamification.queue
+
+logging:
+  level:
+    org:
+      springframework:
+        amqp:
+          rabbit:
+            core:
+              RabbitAdmin: DEBUG
