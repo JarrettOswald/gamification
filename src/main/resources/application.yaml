@@ -7,13 +7,17 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  cloud:
+    consul:
+      host: 192.168.0.109
+  application:
+    name: gamification
 
 server:
   port: 8081
   error:
     include-message: always
     include-binding-errors: always
-
 
 amqp:
   exchange:
